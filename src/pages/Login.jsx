@@ -17,6 +17,9 @@ const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
 
+       const toastId = toast.loading('Processing...');
+
+
     try {
 
       e.preventDefault();
@@ -26,17 +29,17 @@ const navigate = useNavigate();
         Cookies.set("token", response.data.token)
         setToken(response.data.token)
        
-        toast.success("Login Successfull")
+        toast.success("Login Successfull" ,{id:toastId})
         navigate("/")
 
       }
       else {
-        toast.error(response.data.message)
+        toast.error(response.data.message ,{id:toastId})
       }
 
     } catch (error) {
       console.log(error)
-      toast.error(error.response.data.message)
+      toast.error(error.response.data.message,{id:toastId})
     }
 
   }
